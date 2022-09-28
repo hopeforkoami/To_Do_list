@@ -30,6 +30,7 @@ function addTask() {
     tasklist.push(new Task(taskinput.value, generateTodoIndex()));
     generateTaskList();
     taskinput.value = '';
+    localStorage.setItem('taskList', JSON.stringify(this.taskList));
   }
 }
 todoaddbutton.addEventListener('click', addTask);
