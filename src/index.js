@@ -6,10 +6,10 @@ const listContainer = document.querySelector('.todolist');
 const todoaddbutton = document.querySelector('.todo_add_icon');
 const refreshIcon = document.querySelector('.refresh_div');
 const tasklist = [
-  new Task('meet with the Client',1,false),
-  new Task('finish the design on figma',2,false),
-  new Task('reproduce the design in flutter',3,false),
-  new Task('create the Api',4,false),
+  new Task('meet with the Client', 1, false),
+  new Task('finish the design on figma', 2, false),
+  new Task('reproduce the design in flutter', 3, false),
+  new Task('create the Api', 4, false),
 
 ];
 function generateTodoIndex() {
