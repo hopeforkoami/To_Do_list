@@ -44,13 +44,12 @@ export default class TaskList {
 
   clearCompletedTasks() {
     const temps = [];
-    // console.log('inside the task list and the task'+key+1+' statut == '+task.completed);
     this.localData.forEach((task, index) => {
       if (task.completed === true) {
         temps.push(index);
-      }
+       }
     });
-    temps.forEach((element) => {
+     temps.forEach((element) => {
       this.removeItem2(element);
     });
     this.refreshIndex();
