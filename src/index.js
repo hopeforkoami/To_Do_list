@@ -1,46 +1,131 @@
 import './style.css';
-import Task from './modules/task.js';
+import TaskList from './modules/tasklist.js';
 
 const taskinput = document.querySelector('.add_todo_input');
 const listContainer = document.querySelector('.todolist');
 const todoaddbutton = document.querySelector('.todo_add_icon');
 const refreshIcon = document.querySelector('.refresh_div');
-const tasklist = [
-  new Task('meet with the Client', 1, false),
-  new Task('finish the design on figma', 2, false),
-  new Task('reproduce the design in flutter', 3, false),
-  new Task('create the Api', 4, false),
-
-];
-function generateTodoIndex() {
-  let id = 1;
-  if (tasklist.length > 0) {
-    id = tasklist[tasklist.length - 1].index + 1;
-  }
-  return id;
-}
+const tasklist = new TaskList();
 
 function generateTaskList() {
-  let content = '';
-  tasklist.forEach((task) => {
-    content += task.renderLi();
-  });
-  listContainer.innerHTML = content;
+  listContainer.innerHTML = tasklist.generateTaskList();
 }
-function refreshTodoList(e) {
-  e.preventDefault();
+function refreshTodoList() {
   listContainer.innerHTML = '';
   generateTaskList();
 }
-function addTask() {
+function add() {
   if (taskinput.value !== '') {
-    tasklist.push(new Task(taskinput.value, generateTodoIndex()));
+    tasklist.addTask(taskinput.value);
     generateTaskList();
     taskinput.value = '';
-    localStorage.setItem('taskList', JSON.stringify(this.taskList));
+  }
+}
+function hideComponent(elmntsParam) {
+  const test = elmntsParam.classList;
+  if (!test.contains('hidden_item')) {
+    test.toggle('hidden_item');
   }
 }
 
+function displayComponent(elmnts) {
+  if (elmnts.isArray) {
+    elmnts.forEach((elmnt) => {
+      const test = elmnt.classList;
+      if (test.contains('hidden_item')) {
+        test.remove('hidden_item');
+      }
+    });
+  } else {
+    const test = elmnts.classList;
+    if (test.contains('hidden_item')) {
+      test.remove('hidden_item');
+    }
+  }
+}
+function displayLineThroughComponent(elmntsParam) {
+  const test = elmntsParam.classList;
+  if (!test.contains('line_through')) {
+    test.toggle('line_through');
+  }
+}
+
+function removeLineThroughComponent(elmnts) {
+  if (elmnts.isArray) {
+    elmnts.forEach((elmnt) => {
+      const test = elmnt.classList;
+      if (test.contains('line_through')) {
+        test.remove('line_through');
+      }
+    });
+  } else {
+    const test = elmnts.classList;
+    if (test.contains('line_through')) {
+      test.remove('line_through');
+    }
+  }
+}
+
+function completeTask(index) {
+  hideComponent(document.querySelector(`.uncomplete${index}`));
+  displayComponent(document.querySelector(`.complete${index}`));
+  hideComponent(document.querySelector(`.details${index}`));
+  displayComponent(document.querySelector(`.delete${index}`));
+  displayLineThroughComponent(document.querySelector(`.input${index}`));
+  tasklist.localData[index - 1].setCompleted(true);
+}
+
+function uncompleteTask(index) {
+  hideComponent(document.querySelector(`.complete${index}`));
+  displayComponent(document.querySelector(`.uncomplete${index}`));
+  hideComponent(document.querySelector(`.delete${index}`));
+  displayComponent(document.querySelector(`.details${index}`));
+  removeLineThroughComponent(document.querySelector(`.input${index}`));
+  tasklist.localData[index - 1].setCompleted(false);
+}
+
+function focusInput(index) {
+  hideComponent(document.querySelector(`.details${index}`));
+  displayComponent(document.querySelector(`.delete${index}`));
+}
+
+function lifocusout(index) {
+  hideComponent(document.querySelector(`.delete${index}`));
+  displayComponent(document.querySelector(`.details${index}`));
+}
+
+function taskUpdate(index) {
+  tasklist.localData[index - 1].description = document.querySelector(`.input${index}`).value;
+  tasklist.refreshIndex();
+}
+
+function removeTask(index) {
+  tasklist.removeItem(index - 1);
+  refreshTodoList();
+}
+function clearCompletedTasks() {
+  tasklist.clearCompletedTasks();
+  refreshTodoList();
+}
+function displayDeleteButton(index) {
+  hideComponent(document.querySelector(`.details${index}`));
+  displayComponent(document.querySelector(`.delete${index}`));
+}
+function hideDeleteButton(index) {
+  hideComponent(document.querySelector(`.details${index}`));
+  displayComponent(document.querySelector(`.delete${index}`));
+}
+document.hideDeleteButton = hideDeleteButton;
+document.displayDeleteButton = displayDeleteButton;
+document.completeTask = completeTask;
+document.uncompleteTask = uncompleteTask;
+document.focusInput = focusInput;
+document.lifocusout = lifocusout;
+document.taskUpdate = taskUpdate;
+document.removeTask = removeTask;
+document.displayLineThroughComponent = displayLineThroughComponent;
+document.removeLineThroughComponent = removeLineThroughComponent;
 document.addEventListener('DOMContentLoaded', refreshTodoList);
-todoaddbutton.addEventListener('click', addTask);
+document.querySelector('.todo_clear_all_completed').addEventListener('click', clearCompletedTasks);
+todoaddbutton.addEventListener('click', add);
 refreshIcon.addEventListener('click', refreshTodoList);

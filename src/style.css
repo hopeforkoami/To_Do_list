@@ -96,3 +96,24 @@
   font-family: 'Open sans', sans-serif;
   background-color: #f6f6f6;
 }
+
+.hidden_item {
+  display: none;
+}
+
+.todo_description {
+  border: none;
+  color: inherit;
+  font-family: inherit !important;
+  font-size: inherit;
+}
+
+.todo_description:focus {
+  outline: none !important;
+  color: inherit;
+  font-family: inherit;
+}
+
+.line_through {
+  text-decoration: line-through;
+}
