@@ -107,11 +107,11 @@ function clearCompletedTasks() {
   tasklist.clearCompletedTasks();
   refreshTodoList();
 }
-function displayDeleteButton(index){
+function displayDeleteButton(index) {
   hideComponent(document.querySelector(`.details${index}`));
   displayComponent(document.querySelector(`.delete${index}`));
 }
-function hideDeleteButton(index){
+function hideDeleteButton(index) {
   hideComponent(document.querySelector(`.details${index}`));
   displayComponent(document.querySelector(`.delete${index}`));
 }

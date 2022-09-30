@@ -47,9 +47,9 @@ export default class TaskList {
     this.localData.forEach((task, index) => {
       if (task.completed === true) {
         temps.push(index);
-       }
+      }
     });
-     temps.forEach((element) => {
+    temps.forEach((element) => {
       this.removeItem2(element);
     });
     this.refreshIndex();
