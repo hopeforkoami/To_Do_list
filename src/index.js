@@ -43,13 +43,16 @@ function displayComponent(elmnts) {
     }
   }
 }
+function focusInput(index) {
+  hideComponent(document.querySelector(`.details${index}`));
+  displayComponent(document.querySelector(`.delete${index}`));
+}
 function displayLineThroughComponent(elmntsParam) {
   const test = elmntsParam.classList;
   if (!test.contains('line_through')) {
     test.toggle('line_through');
   }
 }
-
 function removeLineThroughComponent(elmnts) {
   if (elmnts.isArray) {
     elmnts.forEach((elmnt) => {
@@ -65,7 +68,6 @@ function removeLineThroughComponent(elmnts) {
     }
   }
 }
-
 function completeTask(index) {
   hideComponent(document.querySelector(`.uncomplete${index}`));
   displayComponent(document.querySelector(`.complete${index}`));
@@ -84,9 +86,9 @@ function uncompleteTask(index) {
   tasklist.localData[index - 1].setCompleted(false);
 }
 
-function focusInput(index) {
-  hideComponent(document.querySelector(`.details${index}`));
-  displayComponent(document.querySelector(`.delete${index}`));
+function clearCompletedTasks() {
+  tasklist.clearCompletedTasks();
+  refreshTodoList();
 }
 
 function lifocusout(index) {
@@ -103,10 +105,7 @@ function removeTask(index) {
   tasklist.removeItem(index - 1);
   refreshTodoList();
 }
-function clearCompletedTasks() {
-  tasklist.clearCompletedTasks();
-  refreshTodoList();
-}
+
 function displayDeleteButton(index) {
   hideComponent(document.querySelector(`.details${index}`));
   displayComponent(document.querySelector(`.delete${index}`));
