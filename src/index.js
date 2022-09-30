@@ -43,10 +43,54 @@ function displayComponent(elmnts) {
     }
   }
 }
-
 function focusInput(index) {
   hideComponent(document.querySelector(`.details${index}`));
   displayComponent(document.querySelector(`.delete${index}`));
+}
+function displayLineThroughComponent(elmntsParam) {
+  const test = elmntsParam.classList;
+  if (!test.contains('line_through')) {
+    test.toggle('line_through');
+  }
+}
+function removeLineThroughComponent(elmnts) {
+  if (elmnts.isArray) {
+    elmnts.forEach((elmnt) => {
+      const test = elmnt.classList;
+      if (test.contains('line_through')) {
+        test.remove('line_through');
+      }
+    });
+  } else {
+    const test = elmnts.classList;
+    if (test.contains('line_through')) {
+      test.remove('line_through');
+    }
+  }
+}
+function completeTask(index) {
+  hideComponent(document.querySelector(`.uncomplete${index}`));
+  displayComponent(document.querySelector(`.complete${index}`));
+  hideComponent(document.querySelector(`.details${index}`));
+  displayComponent(document.querySelector(`.delete${index}`));
+  displayLineThroughComponent(document.querySelector(`.input${index}`));
+  tasklist.localData[index - 1].setCompleted(true);
+  tasklist.refreshIndex();
+}
+
+function uncompleteTask(index) {
+  hideComponent(document.querySelector(`.complete${index}`));
+  displayComponent(document.querySelector(`.uncomplete${index}`));
+  hideComponent(document.querySelector(`.delete${index}`));
+  displayComponent(document.querySelector(`.details${index}`));
+  removeLineThroughComponent(document.querySelector(`.input${index}`));
+  tasklist.localData[index - 1].setCompleted(false);
+  tasklist.refreshIndex();
+}
+
+function clearCompletedTasks() {
+  tasklist.clearCompletedTasks();
+  refreshTodoList();
 }
 
 function lifocusout(index) {
@@ -63,10 +107,7 @@ function removeTask(index) {
   tasklist.removeItem(index - 1);
   refreshTodoList();
 }
-function clearCompletedTasks() {
-  tasklist.clearCompletedTasks();
-  refreshTodoList();
-}
+
 function displayDeleteButton(index) {
   hideComponent(document.querySelector(`.details${index}`));
   displayComponent(document.querySelector(`.delete${index}`));
