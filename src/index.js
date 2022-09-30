@@ -75,6 +75,7 @@ function completeTask(index) {
   displayComponent(document.querySelector(`.delete${index}`));
   displayLineThroughComponent(document.querySelector(`.input${index}`));
   tasklist.localData[index - 1].setCompleted(true);
+  tasklist.refreshIndex();
 }
 
 function uncompleteTask(index) {
@@ -84,6 +85,7 @@ function uncompleteTask(index) {
   displayComponent(document.querySelector(`.details${index}`));
   removeLineThroughComponent(document.querySelector(`.input${index}`));
   tasklist.localData[index - 1].setCompleted(false);
+  tasklist.refreshIndex();
 }
 
 function clearCompletedTasks() {
