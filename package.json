@@ -4,8 +4,10 @@
   "description": "> this To Do List\r In this project, I will build a simple HTML list of To Do tasks. This simple web page will be built using webpack and served by a webpack dev server.",
   "main": "index.js",
   "scripts": {
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development",
+    "build": "webpack --config webpack.config.js",
     "start": "webpack serve --open"
   },
   "repository": {

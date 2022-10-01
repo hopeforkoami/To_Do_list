@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>To Do List</title>
 <script defer src="main.js"></script></head>
 <body>
@@ -12,37 +13,18 @@
         <div class="todoelement title_div">
           <span class="div_text">Today's To Do </span>
           <div class="refresh_div">
-            <span class="unfinish_tasks_counter">4</span>
             <img src="./assets/refreshicon.svg" alt="refresh icon" class="refresh_icon">
           </div> 
         </div>
-        <form class="todoelement" action="">
-          <input type="text" name="tododescription">
-          <button type="submit"><img src="./assets/intericon.svg" alt="enter_icon"></button>
-        </form>
+        <div class="todoelement" action="">
+          <input type="text" name="tododescription" class="add_todo_input" placeholder="Add to your list..." required>
+          <button type="submit" class="add_submit_button"><img src="./assets/intericon.svg" alt="enter_icon" class="todo_add_icon"></button>
+        </div>
         <ul class=" todoelement todolist">
-          <li class="todo_details">
-              <img src="./assets/completeicon.svg" alt="todo statut icon">
-              <span class="todo_description">Drag'n drop to recorder your list</span>
-              <img src="assets/detail_icon.svg" alt="action icon" class="doto_action">
-          </li>
-          <li class="todo_details">
-            <img src="./assets/completeicon.svg" alt="todo statut icon">
-            <span class="todo_description">Drag'n drop to recorder your list</span>
-            <img src="assets/detail_icon.svg" alt="action icon" class="doto_action">
-          </li>
-          <li class="todo_details">
-            <img src="./assets/completeicon.svg" alt="todo statut icon">
-            <span class="todo_description">Drag'n drop to recorder your list</span>
-            <img src="assets/detail_icon.svg" alt="action icon" class="doto_action">
-          </li>
-          <li class="todo_details">
-            <img src="./assets/completeicon.svg" alt="todo statut icon">
-            <span class="todo_description">Drag'n drop to recorder your list</span>
-            <img src="assets/detail_icon.svg" alt="action icon" class="doto_action">
-          </li>
+          
+        
         </ul>
-        <button type="button" class="todo_clear_all_completed">Clear all completed</button>
+        <button type="button" class="todo_clear_all_completed" >Clear all completed</button>
       </div>
   </div>
   
