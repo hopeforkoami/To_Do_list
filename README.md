@@ -10,7 +10,7 @@ In this project, I will build a simple HTML list of To Do tasks. This simple web
 
 ## Live Demo 🔗
 
-Check the live demo [github](https://hopeforkoami.github.io/To_Do_list/)👈
+Check the live demo [github](https://hopeforkoami.github.io/To_Do_list/dist/)👈
 
 
 ## Getting Started
